@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'driver',
     # installed apps
     'rest_framework',
+    'corsheaders',
 
 ]
 

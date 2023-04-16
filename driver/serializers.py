@@ -49,5 +49,3 @@ class DriverCreateSerializer(serializers.ModelSerializer):
         driver = Driver.objects.create(**validated_data)
         return driver
 
-    
-

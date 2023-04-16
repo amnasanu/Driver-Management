@@ -1,0 +1,89 @@
+Project Name:
+Driver Management
+Liver Seriver link :
+  http://34.227.25.210/
+  http://34.227.25.210/driver
+  http://34.227.25.210/driver/
+  http://34.227.25.210/driver/id
+
+
+Description 
+This project is a Django REST API for managing truck drivers. It allows you to create, view, and filter drivers by various attributes such as name, mobile number, email, and assigned truck's number plate. The project uses Django REST Framework and includes serializers, views, and models for managing drivers and their associated trucks. The project is hosted on AWS and utilizes an RDS instance to connect to a PostgreSQL database, version of postgreSQL is 14.6.
+
+Installation and Setup:
+
+To run this project, you will need to have Python 3.x and Django 4.2 or higher installed on your system. Here are the steps to get started:
+
+1 Clone this repository to your local machine.
+
+2 Open a terminal and navigate to the project directory.
+
+3 Create a virtual environment for the project:
+    python -m venv env
+
+4 Activate the virtual environment:
+
+        env\Scripts\activate.bat
+                or
+        source env/bin/activate
+
+5 Install the required packages using pip:
+pip install -r requirement.txt
+
+6 Start the development server:
+python manage.py runserver
+
+
+API Endpoints for Driver:
+
+GET http://127.0.0.1:8000/driver: Returns a list of all drivers. You can filter the data using the following parameters:
+
+email: filter by driver's email - http://127.0.0.1:8000/driver?email=email_id
+mobile_number: filter by driver's mobile number - http://127.0.0.1:8000/driver?mobile_number=mobile_number
+language: filter by driver's language - http://127.0.0.1:8000/driver?language=language
+number_plate: filter by truck's number plate - http://127.0.0.1:8000/driver?number_plate=number_plate
+
+
+GET http://127.0.0.1:8000/driver/id: Returns a single driver.
+
+POST http://127.0.0.1:8000/driver/: Creates a new driver. You can either create a new truck with its number plate and registration number during driver creation using the following JSON:
+
+{
+    "name": "",
+    "mobile_number": "",
+    "email": "",
+    "language": "",
+    "city": "",
+    "district": "",
+    "truck": {
+        "number_plate": "",
+        "registration_number": ""
+    }
+}
+
+Or, you can assign an existing truck to the driver using the following JSON:
+{
+    "name": "",
+    "mobile_number": "",
+    "email": "",
+    "language": "",
+    "city": "",
+    "district": "",
+    "assigned_truck": ""
+}
+
+Installed Librarys
+1 Django==4.2
+
+2 djangorestframework==3.14.0
+
+3 django-cors-headers==3.14.0  = This library provides middleware for handling Cross-Origin Resource Sharing (CORS) in Django applications, allowing for controlled access to resources from different domains.
+
+4 psycopg2==2.9.6 :This library is a PostgreSQL database adapter for Python, providing a convenient way to interact with PostgreSQL databases from Python applications
+
+5 whitenoise==6.4.0 : This library is a static file serving middleware for Python web applications, allowing for efficient delivery of static files
+
+Assumptions : 
+I creted two model Truck and Driver Each Truck can be assigned to at most one Driver at a time. This is reflected in the assigned_truck field of the Driver model, which is a OneToOneField 
+
+The number_plate and registration_number fields of the Truck model are unique fields. This is because each Truck should have a unique identifier, and these fields provide that identifier.
