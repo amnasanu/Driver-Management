@@ -5,6 +5,7 @@ Liver Seriver link :
   http://34.227.25.210/driver
   http://34.227.25.210/driver/
   http://34.227.25.210/driver/id
+  http://34.227.25.210/drivers
 
 
 Description 
@@ -71,6 +72,34 @@ Or, you can assign an existing truck to the driver using the following JSON:
     "district": "",
     "assigned_truck": ""
 }
+
+
+POST http://127.0.0.1:8000/drivers : To create bulk of driver
+
+here is the json for this
+[
+    {
+        "name": "",
+        "mobile_number": "",
+        "email": "",
+        "language": "",
+        "city" : "",
+        "district" : "",
+        "truck": {
+            "number_plate": "",
+            "registration_number": ""
+        }
+    },
+    {
+        "name": " ",
+        "mobile_number": "",
+        "email": "",
+        "language": "",
+        "city" : "",
+        "district" : "",
+        "assigned_truck": 
+    }
+]
 
 Installed Librarys
 1 Django==4.2

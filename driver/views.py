@@ -2,6 +2,7 @@ from rest_framework import generics
 from .models import Driver
 from rest_framework.response import Response
 from .serializers import DriverSerializer, DriverCreateSerializer
+from rest_framework import status
 
 # Create your views here.
 
@@ -42,3 +43,16 @@ class DriverCreate(generics.CreateAPIView):
     serializer_class = DriverCreateSerializer
 
 
+class DriverBulkCreateView(generics.CreateAPIView):
+    serializer_class = DriverCreateSerializer
+
+    def post(self, request, *args, **kwargs):
+        drivers_data = request.data
+        serializer = self.get_serializer(data=drivers_data, many=True)
+        serializer.is_valid(raise_exception=True)
+        drivers = serializer.save()
+
+        return Response({
+            'status': 'success',
+            'drivers': DriverSerializer(drivers, many=True).data
+        }, status=status.HTTP_201_CREATED)
